@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<b:beans xmlns="http://www.springframework.org/schema/security"
+         xmlns:b="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- Configure a basic web security service -->
+    <http auto-config="true">
+        <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+    </http>
+
+    <!-- Simulate some test users directly in the namespace -->
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="prateek" password="prat33k@123" authorities="ROLE_USER" />
+                <user name="root" password="root@123" authorities="ROLE_USER" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+</b:beans>
+
