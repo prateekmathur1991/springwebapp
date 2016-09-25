@@ -2,11 +2,16 @@
 
 <html>
     <head>
-        <title>Welcome to Spring Webapp</title>
+        <title>Springwebapp Admin</title>
         <meta charset="UTF-8" />
     </head>
     <body>
         <h2>${title}</h2>
         <p>${message}</p>
+
+        <p>
+            <c:url value="/logout" var="logoutUrl" />
+            <a href="${logoutUrl}">Log Out</a>
+        </p>
     </body>
 </html>
