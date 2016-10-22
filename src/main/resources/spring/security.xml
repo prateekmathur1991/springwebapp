@@ -8,7 +8,8 @@
 
     <!-- Configure a basic web security service -->
     <http auto-config="true">
-        <intercept-url pattern="/" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_USER')" />
+        <logout logout-success-url="/" logout-url="/logout" />
     </http>
 
     <!-- Simulate some test users directly in the namespace -->
