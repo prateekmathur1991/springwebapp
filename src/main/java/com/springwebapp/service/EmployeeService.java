@@ -4,7 +4,7 @@ import com.springwebapp.dto.EmployeeDTO;
 import com.springwebapp.entity.Employee;
 
 /**
- * Created by prateek on 25/9/16.
+ * The service interface for Employee entity
  */
 public interface EmployeeService {
 

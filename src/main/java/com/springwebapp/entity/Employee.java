@@ -1,11 +1,11 @@
 package com.springwebapp.entity;
 
 import com.springwebapp.dto.EmployeeDTO;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * The entity to represent an Employee
@@ -15,9 +15,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "employee")
+@Getter @Setter
+@NoArgsConstructor
 public class Employee {
-
-    public Employee() {}
 
     public Employee(EmployeeDTO employeeDTO)    {
         this.firstName = employeeDTO.firstName;
@@ -27,6 +27,7 @@ public class Employee {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "first_name")
@@ -37,36 +38,4 @@ public class Employee {
 
     @Column(name = "salary")
     private Integer salary;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Integer getSalary() {
-        return salary;
-    }
-
-    public void setSalary(Integer salary) {
-        this.salary = salary;
-    }
 }

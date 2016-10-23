@@ -1,19 +1,22 @@
+/**
+ * Handles requests sent for all employees
+ *
+ * @author Prateek Mathur
+ */
+
 package com.springwebapp.controller;
 
 import com.springwebapp.dto.EmployeeDTO;
 import com.springwebapp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- * Handles requests sent for all employees
- *
- * @author Prateek Mathur
- */
+import javax.validation.Valid;
 
 @Controller
 public class EmployeeController {
@@ -21,25 +24,34 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @RequestMapping(value = "/admin/addEmployee", method = RequestMethod.GET)
-    public ModelAndView addEmployeePage()   {
+    @GetMapping("/admin/addEmployee")
+    public ModelAndView addEmployeePage() {
 
-        ModelAndView model = new ModelAndView();
-        model.setViewName("addEmployee");
-
-        model.addObject("AddEmployeeForm", new EmployeeDTO());
-
-        return model;
+        return new ModelAndView("addEmployee", "AddEmployeeForm", new EmployeeDTO());
     }
 
-    @RequestMapping(value = "/admin/addEmployee", method = RequestMethod.POST)
-    public ModelAndView addEmployeeAction(@ModelAttribute(value = "AddEmployeeForm") EmployeeDTO employeeDTO) {
+    @PostMapping("/admin/addEmployee")
+    public ModelAndView addEmployeeAction(@Valid @ModelAttribute("AddEmployeeForm") EmployeeDTO employeeDTO, BindingResult bindingResult) {
 
-        employeeService.saveWithDTO(employeeDTO);
+        if (bindingResult.hasErrors()) {
+            ModelAndView model = new ModelAndView("addEmployee");
+            model.addObject("AddEmployeeForm", employeeDTO);
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("addEmployee");
+            return model;
+        }
 
-        return modelAndView;
+        Boolean saveResult = Boolean.FALSE;
+        try {
+            employeeService.saveWithDTO(employeeDTO);
+            saveResult = Boolean.TRUE;
+        } catch (Exception e) {
+            System.err.println("Exception in EmployeeController.addEmployeeAction when saving employee:: " + e.getLocalizedMessage());
+        }
+
+        ModelAndView model = new ModelAndView("addEmployee");
+        model.addObject("AddEmployeeForm", employeeDTO);
+        model.addObject("saveResult", saveResult);
+
+        return model;
     }
 }
