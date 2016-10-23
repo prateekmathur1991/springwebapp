@@ -9,7 +9,7 @@ public interface EmployeeDao {
 
     Employee save(Employee employee);
 
-    Employee getEmployee(Long employeeId);
+    Employee findById(Long employeeId);
 
     void update(Employee employee);
 

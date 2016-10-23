@@ -12,14 +12,9 @@
         <logout logout-success-url="/" logout-url="/logout" />
     </http>
 
-    <!-- Simulate some test users directly in the namespace -->
+    <!-- Configure a custom authentication provider -->
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="prateek" password="prat33k@123" authorities="ROLE_USER" />
-                <user name="root" password="root@123" authorities="ROLE_USER" />
-            </user-service>
-        </authentication-provider>
+        <authentication-provider ref="adminAuthenticationProvider" />
     </authentication-manager>
 
 </b:beans>

@@ -22,14 +22,20 @@ public class EmployeeDaoImpl implements EmployeeDao {
             em.persist(employee);
         } catch (Exception e) {
             System.err.println("Exception in EmployeeDaoImpl.save:: " + e.getLocalizedMessage());
+            return null;
         }
 
         return employee;
     }
 
     @Override
-    public Employee getEmployee(Long employeeId) {
-        return (Employee) em.find(Employee.class, employeeId);
+    public Employee findById(Long employeeId) {
+        try {
+            return (Employee) em.find(Employee.class, employeeId);
+        } catch (Exception e) {
+            System.err.println("Exception in EmployeeDaoImpl.findById:: " + e.getLocalizedMessage());
+            return null;
+        }
     }
 
     @Override
