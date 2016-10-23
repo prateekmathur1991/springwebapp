@@ -1,21 +1,30 @@
 package com.springwebapp.dao;
 
 import com.springwebapp.entity.Employee;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- * Created by prateek on 25/9/16.
+ * The DAO implementation for Employee entity
  */
+
+@Repository
 public class EmployeeDaoImpl implements EmployeeDao {
 
     @PersistenceContext
     private EntityManager em;
 
     @Override
-    public void save(Employee employee) {
-        em.persist(employee);
+    public Employee save(Employee employee) {
+        try {
+            em.persist(employee);
+        } catch (Exception e) {
+            System.err.println("Exception in EmployeeDaoImpl.save:: " + e.getLocalizedMessage());
+        }
+
+        return employee;
     }
 
     @Override

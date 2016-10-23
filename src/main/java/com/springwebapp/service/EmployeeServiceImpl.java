@@ -4,21 +4,27 @@ import com.springwebapp.dao.EmployeeDao;
 import com.springwebapp.dto.EmployeeDTO;
 import com.springwebapp.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Created by prateek on 25/9/16.
+ * The service implementation for Employee entity
  */
+
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeDao employeeDao;
 
     @Override
+    @Transactional
     public void saveWithDTO(EmployeeDTO employeeDTO) {
         employeeDao.save(new Employee(employeeDTO));
     }
 
     @Override
+    @Transactional
     public void save(Employee employee) {
         employeeDao.save(employee);
     }
@@ -29,11 +35,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    @Transactional
     public void update(Employee employee) {
         employeeDao.update(employee);
     }
 
     @Override
+    @Transactional
     public void delete(Long employeeId) {
         employeeDao.delete(employeeId);
     }
