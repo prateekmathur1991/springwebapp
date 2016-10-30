@@ -8,6 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -29,25 +30,18 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-        Admin admin = adminService.findByUsernameAndPassword(authentication.getPrincipal().toString(), authentication.getCredentials().toString());
+        Admin admin = adminService.findByUsernameAndPassword(String.valueOf(authentication.getPrincipal()), String.valueOf(authentication.getCredentials()));
         if (admin == null)  {
             return null;
         }
 
-        GrantedAuthority authority = new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return "ROLE_USER";
-            }
-        };
-
-        List<GrantedAuthority> authorities = Collections.unmodifiableList(Arrays.asList(authority));
+        List<GrantedAuthority> authorities = Collections.unmodifiableList(Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
 
         return authentication = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(), authentication.getCredentials(), authorities);
     }
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return true;
+        return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 }
