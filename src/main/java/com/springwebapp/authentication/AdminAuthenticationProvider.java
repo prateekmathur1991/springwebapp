@@ -1,4 +1,4 @@
-package com.springwebapp.auth;
+package com.springwebapp.authentication;
 
 import com.springwebapp.entity.Admin;
 import com.springwebapp.service.AdminService;
@@ -35,7 +35,8 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
             return null;
         }
 
-        List<GrantedAuthority> authorities = Collections.unmodifiableList(Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
+        // TODO How to store and retrieve the authorities of a user from a DB??
+        List<GrantedAuthority> authorities = Collections.unmodifiableList(Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")));
 
         return authentication = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(), authentication.getCredentials(), authorities);
     }
