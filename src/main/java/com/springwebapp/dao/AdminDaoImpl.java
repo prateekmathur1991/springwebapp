@@ -27,6 +27,20 @@ public class AdminDaoImpl implements AdminDao {
     }
 
     @Override
+    public Admin findByUsername(String username) {
+        try {
+            TypedQuery<Admin> query = em.createQuery(" From Admin where username = :uname", Admin.class);
+            query.setParameter("uname", username);
+            query.setMaxResults(1);
+
+            return query.getSingleResult();
+        } catch (Exception e) {
+            System.err.println("Error in AdminDaoImpl.findByUsername:: " + e.getLocalizedMessage());
+            return null;
+        }
+    }
+
+    @Override
     public Admin findByUsernameAndPassword(String username, String password) {
         try {
             TypedQuery<Admin> query = em.createQuery(" From Admin where username = :uname and password = :pass", Admin.class);

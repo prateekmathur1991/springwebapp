@@ -21,6 +21,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public Admin findByUsername(String username) {
+        return adminDao.findByUsername(username);
+    }
+
+    @Override
     public Admin findByUsernameAndPassword(String username, String password) {
         return adminDao.findByUsernameAndPassword(username, password);
     }

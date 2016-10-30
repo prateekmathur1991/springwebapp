@@ -12,9 +12,14 @@
         <logout logout-success-url="/" logout-url="/logout" />
     </http>
 
-    <!-- Configure a custom authentication provider -->
+    <!-- Declare a BCrypt password encoder -->
+    <b:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+    <!-- Provide a custom UserDetailsService implementation -->
     <authentication-manager>
-        <authentication-provider ref="adminAuthenticationProvider" />
+        <authentication-provider user-service-ref="adminDetailsService">
+            <password-encoder ref="bcryptPasswordEncoder" />
+        </authentication-provider>
     </authentication-manager>
 
 </b:beans>

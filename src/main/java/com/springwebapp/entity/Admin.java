@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "admin")
@@ -21,12 +22,15 @@ public class Admin {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false, unique = true)
     private String password;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "admin")
+    private Set<AdminRole> adminRoles;
 }

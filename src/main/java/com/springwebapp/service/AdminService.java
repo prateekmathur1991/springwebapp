@@ -9,6 +9,8 @@ public interface AdminService {
 
     Admin findById(Long id);
 
+    Admin findByUsername(String username);
+
     Admin findByUsernameAndPassword(String username, String password);
 
     Admin save(Admin admin);
