@@ -21,11 +21,13 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Admin findByUsername(String username) {
         return adminDao.findByUsername(username);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Admin findByUsernameAndPassword(String username, String password) {
         return adminDao.findByUsernameAndPassword(username, password);
     }
