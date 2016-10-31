@@ -35,4 +35,10 @@ public class MainController {
         return model;
     }
 
+    @GetMapping("/logout")
+    public ModelAndView logout()    {
+
+        return new ModelAndView("redirect:/");
+    }
+
 }

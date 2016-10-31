@@ -8,17 +8,20 @@
 
     <!-- Configure a basic web security service -->
     <http auto-config="true">
-        <intercept-url pattern="/admin/**" access="hasRole('ROLE_USER')" />
-        <logout logout-success-url="/" logout-url="/logout" />
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+        <logout logout-success-url="/" logout-url="/logout" invalidate-session="true" delete-cookies="JSESSIONID" />
     </http>
 
-    <!-- Simulate some test users directly in the namespace -->
+    <!-- Enable Method level security using annotations -->
+    <global-method-security secured-annotations="enabled" pre-post-annotations="enabled" />
+
+    <!-- Declare a BCrypt password encoder -->
+    <b:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+    <!-- Provide a custom UserDetailsService implementation -->
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="prateek" password="prat33k@123" authorities="ROLE_USER" />
-                <user name="root" password="root@123" authorities="ROLE_USER" />
-            </user-service>
+        <authentication-provider user-service-ref="adminDetailsService">
+            <password-encoder ref="bcryptPasswordEncoder" />
         </authentication-provider>
     </authentication-manager>
 
