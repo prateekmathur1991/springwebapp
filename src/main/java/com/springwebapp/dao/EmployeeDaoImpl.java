@@ -1,10 +1,13 @@
 package com.springwebapp.dao;
 
+import com.springwebapp.entity.Admin;
 import com.springwebapp.entity.Employee;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 /**
  * The DAO implementation for Employee entity
@@ -15,6 +18,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @PersistenceContext
     private EntityManager em;
+
+    @Override
+    public List<Employee> list() {
+        try {
+            return em.createQuery(" From Employee", Employee.class).getResultList();
+        } catch (Exception e) {
+            System.err.println("Error in EmployeeDaoImpl.list:: " + e.getLocalizedMessage());
+            return null;
+        }
+    }
 
     @Override
     public Employee save(Employee employee) {
