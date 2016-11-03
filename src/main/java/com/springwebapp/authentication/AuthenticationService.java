@@ -32,7 +32,7 @@ public interface AuthenticationService {
 
     /**
      * Logs out the user.
-     * This method is also overloaded to accept a token, which is intended to be used to a REST call
+     * This method is also overloaded to accept a token, which is intended to be used with a REST call
      */
     void logout();
 
