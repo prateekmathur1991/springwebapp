@@ -6,10 +6,29 @@
          xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
+    <!-- Create a separate web security service for securing REST APIs -->
+    <http pattern="/rest/**" realm="Protected API"
+          use-expressions="true"
+          create-session="stateless"
+          entry-point-ref="unauthorizedEntryPoint"
+          authentication-manager-ref="authenticationManager">
+
+        <intercept-url pattern="/rest/**" access="hasRole('ROLE_ADMIN')" />
+
+        <custom-filter ref="tokenAuthenticationFilter" position="FORM_LOGIN_FILTER" />
+
+        <!-- This is required to avoid 'Could not verify CSRF token' error -->
+        <csrf disabled="true" />
+
+    </http>
+
     <!-- Configure a basic web security service -->
     <http auto-config="true">
+
+        <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
         <logout logout-success-url="/" logout-url="/logout" invalidate-session="true" delete-cookies="JSESSIONID" />
+
     </http>
 
     <!-- Enable Method level security using annotations -->
@@ -19,7 +38,7 @@
     <b:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
     <!-- Provide a custom UserDetailsService implementation -->
-    <authentication-manager>
+    <authentication-manager id="authenticationManager">
         <authentication-provider user-service-ref="adminDetailsService">
             <password-encoder ref="bcryptPasswordEncoder" />
         </authentication-provider>

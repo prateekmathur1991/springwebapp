@@ -1,4 +1,4 @@
-package com.springwebapp.authentication;
+package com.springwebapp.authentication.impl;
 
 import com.springwebapp.entity.Admin;
 import com.springwebapp.service.AdminService;
