@@ -31,6 +31,12 @@ public interface AuthenticationService {
     boolean checkToken(String token);
 
     /**
+     * Logs out the user.
+     * This method is also overloaded to accept a token, which is intended to be used to a REST call
+     */
+    void logout();
+
+    /**
      * Logs out the user, and invalidates the token. Also clears the
      * {@link org.springframework.security.core.context.SecurityContext} in case of successful logout.
      *

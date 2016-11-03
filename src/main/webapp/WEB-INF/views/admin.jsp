@@ -11,6 +11,7 @@
 
         <p>
             <c:url value="/logout" var="logoutUrl" />
+            <a href="<c:url value="/admin/addEmployee" />">Add Employee</a>
             <a href="${logoutUrl}">Log Out</a>
         </p>
     </body>
