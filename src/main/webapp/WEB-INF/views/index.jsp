@@ -8,5 +8,8 @@
     <body>
         <h2>${title}</h2>
         <p>${message}</p>
+
+        <a href="<c:url value="/admin"/>">Login as Admin</a>
+        <a href="<c:url value="/consumeRest"/>">Consume Rest</a>
     </body>
 </html>

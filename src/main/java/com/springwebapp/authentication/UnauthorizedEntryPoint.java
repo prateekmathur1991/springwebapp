@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Prateek Mathur on 11/1/2016.
+ * This class is invoked whenever the {@link TokenAuthenticationFilter} deems
+ * an incoming request as UN_AUTHORIZED.
  */
 @Component
 public class UnauthorizedEntryPoint implements AuthenticationEntryPoint {

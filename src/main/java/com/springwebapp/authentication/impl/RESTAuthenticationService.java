@@ -63,6 +63,11 @@ public class RESTAuthenticationService implements AuthenticationService {
     }
 
     @Override
+    public void logout() {
+        SecurityContextHolder.clearContext();
+    }
+
+    @Override
     public void logout(String token) {
         tokenManager.removeUser(token);
         SecurityContextHolder.clearContext();
