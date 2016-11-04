@@ -7,6 +7,7 @@
 package com.springwebapp.controller;
 
 import com.springwebapp.authentication.AuthenticationService;
+import com.springwebapp.utils.AppUtils;
 import org.glassfish.jersey.client.ClientConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -66,7 +67,7 @@ public class MainController {
 
         try {
             client = ClientBuilder.newClient(new ClientConfig());
-            WebTarget target = client.target("http://localhost:8080");
+            WebTarget target = client.target(AppUtils.getHostName(request));
 
             Response response = target.path("rest").path("getEmployees").request()
                     .accept(MediaType.APPLICATION_JSON_TYPE)
