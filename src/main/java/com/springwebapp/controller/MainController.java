@@ -60,7 +60,7 @@ public class MainController {
     }
 
     @GetMapping("/consumeRest")
-    public @ResponseBody String showEmployees(HttpServletRequest request) {
+    public @ResponseBody String consumeRest(HttpServletRequest request) {
 
         Client client = null;
         String entity = null;
@@ -90,7 +90,7 @@ public class MainController {
 
             return entity;
         } catch (Exception e) {
-            System.err.println(" Exception in MainController.showEmployees::" + e.getLocalizedMessage());
+            System.err.println(" Exception in MainController.consumeRest::" + e.getLocalizedMessage());
             return null;
         } finally {
             if (null != client) {
