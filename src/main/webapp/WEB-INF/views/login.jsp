@@ -25,7 +25,27 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3 form-container">
+
+                <c:if test="${param .error == true}">
+                    <div class="form-group">
+                        <span style="color: red;">${param.error}</span>
+                    </div>
+                </c:if>
+
+                <c:if test="${param .error == 1}">
+                    <div class="form-group">
+                        <span style="color: red;">Username is wrong, I suppose</span>
+                    </div>
+                </c:if>
+
+                <c:if test="${param .error == 2}">
+                    <div class="form-group">
+                        <span style="color: red;">Credentials are wrong!</span>
+                    </div>
+                </c:if>
+
                 <form method="post">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <div class="form-group">
                         <h2>Sign in to Continue</h2>
                     </div>
