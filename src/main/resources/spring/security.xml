@@ -28,7 +28,7 @@
         <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
         <form-login login-page="/login" username-parameter="username" password-parameter="password"
-                    authentication-failure-url="/login?error=true" authentication-failure-handler-ref="authenticationFailureHandler" />
+                    authentication-failure-url="/login?error=true" />
 
         <logout logout-success-url="/" logout-url="/logout" invalidate-session="true" delete-cookies="JSESSIONID" />
 
@@ -47,18 +47,4 @@
         </authentication-provider>
     </authentication-manager>
 
-    <!-- A custom exception mapping handler that maps authentication exceptions to failure URLs -->
-    <b:bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler">
-        <b:property name="exceptionMappings">
-            <!--<b:props>
-                <b:prop key="org.springframework.security.core.userdetails.UsernameNotFoundException">/login?error=1</b:prop>
-            </b:props>-->
-
-            <b:props>
-                <b:prop key="org.springframework.security.authentication.BadCredentialsException">/login?error=2</b:prop>
-            </b:props>
-        </b:property>
-    </b:bean>
-
 </b:beans>
-

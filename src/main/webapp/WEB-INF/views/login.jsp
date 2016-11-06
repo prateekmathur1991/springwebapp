@@ -26,21 +26,9 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3 form-container">
 
-                <c:if test="${param .error == true}">
+                <c:if test="${param.error == true and not empty SPRING_SECURITY_LAST_EXCEPTION}">
                     <div class="form-group">
-                        <span style="color: red;">${param.error}</span>
-                    </div>
-                </c:if>
-
-                <c:if test="${param .error == 1}">
-                    <div class="form-group">
-                        <span style="color: red;">Username is wrong, I suppose</span>
-                    </div>
-                </c:if>
-
-                <c:if test="${param .error == 2}">
-                    <div class="form-group">
-                        <span style="color: red;">Credentials are wrong!</span>
+                        <span style="color: red;">${SPRING_SECURITY_LAST_EXCEPTION.localizedMessage}</span>
                     </div>
                 </c:if>
 
