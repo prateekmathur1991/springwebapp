@@ -32,7 +32,7 @@
                     </div>
                 </c:if>
 
-                <form method="post">
+                <form method="post" action="<c:url value="/login" /> ">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <div class="form-group">
                         <h2>Sign in to Continue</h2>

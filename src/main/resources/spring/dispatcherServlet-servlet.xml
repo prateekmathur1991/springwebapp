@@ -19,7 +19,7 @@
 	<mvc:resources mapping="/webresources/**" location="/webresources/" />
 
 	<!-- MVC View Controller tag is very useful for mapping static views to URLs where no Java controller logic needs to be executed before opening the view -->
-	<mvc:view-controller path="/login" view-name="login" />
+	<mvc:view-controller path="/customlogin" view-name="login" />
 
 	<!-- Configure a Message Source to load messages from -->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">

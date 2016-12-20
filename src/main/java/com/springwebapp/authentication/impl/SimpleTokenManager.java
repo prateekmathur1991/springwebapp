@@ -51,6 +51,6 @@ public class SimpleTokenManager implements TokenManager {
     private String generateRandomToken()    {
         byte [] bytes = new byte[64];
         secureRandom.nextBytes(bytes);
-        return new String(Base64.encode(bytes),StandardCharsets.UTF_8);
+        return new String(Base64.encode(bytes), StandardCharsets.UTF_8);
     }
 }
