@@ -164,6 +164,12 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-jpamodelgen</artifactId>
+			<version>5.2.5.Final</version>
+		</dependency>
+
 		<!-- Project Lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -206,6 +212,9 @@
 					<configuration>
 						<source>1.8</source>
 						<target>1.8</target>
+						<compilerArguments>
+							<processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
+						</compilerArguments>
 					</configuration>
 				</plugin>
 			</plugins>
