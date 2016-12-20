@@ -20,6 +20,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeDao employeeDao;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Employee> list() {
         return employeeDao.list();
     }
@@ -37,6 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Employee findById(Long employeeId) {
         return employeeDao.findById(employeeId);
     }

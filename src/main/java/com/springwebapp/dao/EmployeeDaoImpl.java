@@ -6,10 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.CriteriaUpdate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.List;
 
 /**
@@ -28,6 +25,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
             CriteriaBuilder builder = em.getCriteriaBuilder();
             CriteriaQuery<Employee> criteriaQuery = builder.createQuery(Employee.class);
+
+            criteriaQuery.select(criteriaQuery.from(Employee.class));
 
             return em.createQuery(criteriaQuery).getResultList();
 
@@ -74,21 +73,33 @@ public class EmployeeDaoImpl implements EmployeeDao {
         try {
 
             CriteriaBuilder builder = em.getCriteriaBuilder();
-            CriteriaUpdate<Employee> criteriaUpdate = builder.createCriteriaUpdate(Employee.class);
+            CriteriaUpdate<Employee> employeeCriteriaUpdate = builder.createCriteriaUpdate(Employee.class);
 
-            Root<Employee> employeeRoot = criteriaUpdate.from(Employee.class);
+            Root<Employee> employeeRoot = employeeCriteriaUpdate.from(Employee.class);
 
-            // criteriaUpdate.set(employeeRoot.get(Employee_.firstName), employee.getFirstName());
+            employeeCriteriaUpdate.set(employeeRoot.get(Employee_.firstName), employee.getFirstName());
+            employeeCriteriaUpdate.set(employeeRoot.get(Employee_.lastName), employee.getLastName());
+            employeeCriteriaUpdate.set(employeeRoot.get(Employee_.salary), employee.getSalary());
+
+            employeeCriteriaUpdate.where(builder.equal(employeeRoot.get(Employee_.id), employee.getId()));
+
+            em.createQuery(employeeCriteriaUpdate).executeUpdate();
 
         } catch (Exception e) {
             System.err.println("Exception in EmployeeDaoImpl.update:: " + e.getLocalizedMessage());
         }
-
-        em.merge(employee);
     }
 
     @Override
     public void delete(Long employeeId) {
-        em.remove(em.find(Employee.class, employeeId));
+
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaDelete<Employee> employeeCriteriaDelete = builder.createCriteriaDelete(Employee.class);
+
+        Root<Employee> employeeRoot = employeeCriteriaDelete.from(Employee.class);
+
+        employeeCriteriaDelete.where(builder.equal(employeeRoot.get(Employee_.id), employeeId));
+
+        em.createQuery(employeeCriteriaDelete).executeUpdate();
     }
 }
