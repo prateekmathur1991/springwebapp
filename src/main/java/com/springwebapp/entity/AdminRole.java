@@ -12,7 +12,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "admin_roles")
-@Getter @Setter
 @NoArgsConstructor
 public class AdminRole {
 
@@ -27,4 +26,28 @@ public class AdminRole {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "username", nullable = false)
     private Admin admin;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
 }

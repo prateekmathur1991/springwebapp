@@ -37,11 +37,11 @@ public class Admin implements UserDetails {
     private String name;
 
     @Column(name = "username", nullable = false, unique = true)
-    @Getter @Setter
+    @Setter
     private String username;
 
     @Column(name = "password", nullable = false, unique = true)
-    @Getter @Setter
+    @Setter
     private String password;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "admin")
@@ -76,6 +76,16 @@ public class Admin implements UserDetails {
         }
 
         return authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.username;
     }
 
     @Override
