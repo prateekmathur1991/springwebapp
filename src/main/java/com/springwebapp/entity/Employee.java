@@ -1,12 +1,8 @@
 package com.springwebapp.entity;
 
 import com.springwebapp.dto.EmployeeDTO;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 /**
  * The entity to represent an Employee
@@ -16,8 +12,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "employee")
-@Getter @Setter
-@NoArgsConstructor
 public class Employee {
 
     public Employee(EmployeeDTO employeeDTO)    {
@@ -39,4 +33,39 @@ public class Employee {
 
     @Column(name = "salary")
     private Integer salary;
+
+    public Employee() {
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public Integer getSalary() {
+        return this.salary;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setSalary(Integer salary) {
+        this.salary = salary;
+    }
 }

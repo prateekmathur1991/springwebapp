@@ -1,8 +1,5 @@
 package com.springwebapp.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -17,8 +14,6 @@ import javax.validation.constraints.Size;
  * @author Prateek Mathur
  */
 
-@Getter @Setter
-@NoArgsConstructor
 public class EmployeeDTO {
 
     @NotNull
@@ -34,4 +29,31 @@ public class EmployeeDTO {
     @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Min(1)
     public Integer salary;
+
+    public EmployeeDTO() {
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public Integer getSalary() {
+        return this.salary;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setSalary(Integer salary) {
+        this.salary = salary;
+    }
 }

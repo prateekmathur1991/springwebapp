@@ -1,9 +1,5 @@
 package com.springwebapp.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.*;
 
 /**
@@ -12,7 +8,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "admin_roles")
-@NoArgsConstructor
 public class AdminRole {
 
     @Id
@@ -26,6 +21,9 @@ public class AdminRole {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "username", nullable = false)
     private Admin admin;
+
+    public AdminRole() {
+    }
 
     public Long getId() {
         return id;

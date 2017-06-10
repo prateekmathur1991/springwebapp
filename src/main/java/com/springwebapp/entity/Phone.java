@@ -1,9 +1,5 @@
 package com.springwebapp.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.*;
 
 /**
@@ -11,12 +7,21 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "phone")
-@Getter @Setter
-@NoArgsConstructor
 public class Phone {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    public Phone() {
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

@@ -1,7 +1,6 @@
 package com.springwebapp.controller;
 
 import com.springwebapp.authentication.AuthenticationService;
-import com.springwebapp.entity.Admin;
 import com.springwebapp.entity.Employee;
 import com.springwebapp.service.EmployeeService;
 import org.slf4j.Logger;

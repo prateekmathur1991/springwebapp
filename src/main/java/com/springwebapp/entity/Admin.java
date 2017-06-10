@@ -8,9 +8,6 @@
 
 package com.springwebapp.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,46 +20,39 @@ import java.util.Set;
 
 @Entity
 @Table(name = "admin")
-@NoArgsConstructor
 public class Admin implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    @Getter @Setter
     private Long id;
 
     @Column(name = "name", nullable = false, unique = true)
-    @Getter @Setter
     private String name;
 
     @Column(name = "username", nullable = false, unique = true)
-    @Setter
     private String username;
 
     @Column(name = "password", nullable = false, unique = true)
-    @Setter
     private String password;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "admin")
-    @Setter
     private Set<AdminRole> authorities;
 
     @Column(name = "is_account_non_expired", nullable = false)
-    @Setter
     private Boolean isAccountNonExpired = Boolean.TRUE;
 
     @Column(name = "is_account_non_locked", nullable = false)
-    @Setter
     private Boolean isAccountNonLocked = Boolean.TRUE;
 
     @Column(name = "is_credentials_non_expired", nullable = false)
-    @Setter
     private Boolean isCredentialsNonExpired = Boolean.TRUE;
 
     @Column(name = "is_enabled", nullable = false)
-    @Setter
     private Boolean isEnabled = Boolean.TRUE;
+
+    public Admin() {
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -122,5 +112,49 @@ public class Admin implements UserDetails {
     @Override
     public int hashCode() {
         return username != null ? username.hashCode() : 0;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setAuthorities(Set<AdminRole> authorities) {
+        this.authorities = authorities;
+    }
+
+    public void setIsAccountNonExpired(Boolean isAccountNonExpired) {
+        this.isAccountNonExpired = isAccountNonExpired;
+    }
+
+    public void setIsAccountNonLocked(Boolean isAccountNonLocked) {
+        this.isAccountNonLocked = isAccountNonLocked;
+    }
+
+    public void setIsCredentialsNonExpired(Boolean isCredentialsNonExpired) {
+        this.isCredentialsNonExpired = isCredentialsNonExpired;
+    }
+
+    public void setIsEnabled(Boolean isEnabled) {
+        this.isEnabled = isEnabled;
     }
 }
