@@ -107,4 +107,20 @@ public class Admin implements UserDetails {
     public boolean isEnabled() {
         return this.isEnabled;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Admin admin = (Admin) o;
+
+        return username != null ? username.equals(admin.username) : admin.username == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return username != null ? username.hashCode() : 0;
+    }
 }

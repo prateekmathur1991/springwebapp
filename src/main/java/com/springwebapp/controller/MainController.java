@@ -9,6 +9,8 @@ package com.springwebapp.controller;
 import com.springwebapp.authentication.AuthenticationService;
 import com.springwebapp.utils.AppUtils;
 import org.glassfish.jersey.client.ClientConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,8 +32,14 @@ public class MainController {
     @Autowired
     private AuthenticationService authenticationService;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
+
     @GetMapping("/")
     public ModelAndView hello() {
+
+        LOGGER.debug("hello() is executed, value {}", "springwebapp");
+
+        LOGGER.error("This is Error message", new Exception("Testing"));
 
         ModelAndView model = new ModelAndView("index");
 

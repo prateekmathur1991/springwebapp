@@ -6,3 +6,4 @@ target/
 *.eclipse.*
 .idea/
 .settings/
+/.apt_generated/
