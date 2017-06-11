@@ -8,3 +8,4 @@ target/
 .settings/
 /.apt_generated/
 logs/
+.factorypath
