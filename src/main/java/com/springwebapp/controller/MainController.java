@@ -12,6 +12,7 @@ import org.glassfish.jersey.client.ClientConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,8 +40,6 @@ public class MainController {
 
         LOGGER.debug("hello() is executed, value {}", "springwebapp");
 
-        LOGGER.error("This is Error message", new Exception("Testing"));
-
         ModelAndView model = new ModelAndView("index");
 
         model.addObject("title", "Hello World!");
@@ -62,8 +61,16 @@ public class MainController {
 
     @GetMapping("/logout")
     public ModelAndView logout()    {
+    	
+    	UserDetails loggedInUser = authenticationService.getLoggedInUser();
+    	String username = loggedInUser.getUsername();
+    	
+		LOGGER.info("{} is logging out", username);
 
         authenticationService.logout();
+        
+        LOGGER.info("{} has logged out successfully", username);
+        
         return new ModelAndView("redirect:/");
     }
 
@@ -92,13 +99,12 @@ public class MainController {
                         .header("X-Access-Token", accessToken)
                         .post(Entity.entity(null, MediaType.WILDCARD_TYPE));
 
-                boolean hasEntity = response.hasEntity();
                 entity = response.readEntity(String.class);
             }
 
             return entity;
         } catch (Exception e) {
-            System.err.println(" Exception in MainController.consumeRest::" + e.getLocalizedMessage());
+            LOGGER.error("Exception in MainController.consumeRest {}", e.getLocalizedMessage());
             return null;
         } finally {
             if (null != client) {

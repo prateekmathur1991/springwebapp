@@ -4,6 +4,7 @@ import com.springwebapp.dao.EmployeeDao;
 import com.springwebapp.dto.EmployeeDTO;
 import com.springwebapp.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional(readOnly = true)
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public List<Employee> list() {
         return employeeDao.list();
     }
